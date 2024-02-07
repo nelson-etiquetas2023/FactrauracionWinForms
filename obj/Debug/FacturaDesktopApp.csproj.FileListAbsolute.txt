@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\FacturaDesktopApp\bin\Debug\FacturaDesktopApp.exe.config
+C:\Users\User\source\repos\FacturaDesktopApp\bin\Debug\FacturaDesktopApp.exe
+C:\Users\User\source\repos\FacturaDesktopApp\bin\Debug\FacturaDesktopApp.pdb
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.Properties.Resources.resources
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.csproj.GenerateResource.cache
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.exe
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.pdb
+C:\Users\User\source\repos\FacturaDesktopApp\obj\Debug\FacturaDesktopApp.Factura.resources
