@@ -10,15 +10,15 @@ namespace FacturaDesktopApp.Services
 {
     public class Conexion
     {
-        string ServerLocal = @"";
+        string ServerLocal = @"WINDOWS-P4VOGQ5";
         public SqlConnection cnn;
 
-        public Boolean Conectar() 
+        public Boolean Conectar(string db) 
         {
             try 
             { 
                 cnn = new SqlConnection("server=" + ServerLocal +
-                    "initial catalog=Factura;integrated security=true");
+                    ";initial catalog=FACTURA;integrated security=true");
                 cnn.Open();
                 return true;
             } 

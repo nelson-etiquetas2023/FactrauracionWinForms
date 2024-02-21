@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FacturaDesktopApp.Services; 
 
 namespace FacturaDesktopApp
 {
@@ -17,10 +18,35 @@ namespace FacturaDesktopApp
         {
             InitializeComponent();
         }
+        FacturaService facturaService = new FacturaService();
+        BindingSource bs = new BindingSource();
+        BindingSource bsdetalle = new BindingSource();
+        DataSet ds = new DataSet();
+        Boolean EditMode = false;
         List<DocumentoFactura> FacturasFake = new List<DocumentoFactura>();
+        
 
         private void Factura_Load(object sender, EventArgs e)
         {
+            // conjunto de datos.
+            ds = facturaService.ds;
+            bs.DataSource = ds;
+            bs.DataMember = "dtheaderfactura";
+            // Enlace de datos
+            txt_numeroFactura.DataBindings.Add("text", bs, "NUMERO");
+            txt_fechaFactura.DataBindings.Add("text", bs, "FECHA");
+            txt_idCliente.DataBindings.Add("text", bs, "CUSTOMER_ID");
+            txt_NombreCliente.DataBindings.Add("text", bs, "customer_name");
+            rad_Contado.DataBindings.Add("checked", bs, "CONTADO");
+            rad_Credito.DataBindings.Add("checked", bs, "CREDITO");
+            chk_FacturaImpresa.DataBindings.Add("checked", bs, "IMPRESA");
+            chk_FacturaAnulada.DataBindings.Add("checked", bs, "ANULADA");
+            txt_SubTotal.DataBindings.Add("text", bs, "SUBTOTAL");
+            txt_Impuesto.DataBindings.Add("text",bs,"ITBIS");
+            txt_MontoTotalFactura.DataBindings.Add("text",bs,"MONTO_FACTURA");
+            txt_ComentariosGen.DataBindings.Add("text",bs,"COMENTARIO");
+
+
             FacturasFake = LoadData.GetData();
         }
 

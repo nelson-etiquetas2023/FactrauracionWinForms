@@ -527,7 +527,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Factura";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "git ";
+            this.Text = "SISTEMA DE FACTURACION";
             this.Load += new System.EventHandler(this.Factura_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
