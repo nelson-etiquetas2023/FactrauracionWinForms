@@ -45,9 +45,41 @@ namespace FacturaDesktopApp
             txt_Impuesto.DataBindings.Add("text",bs,"ITBIS");
             txt_MontoTotalFactura.DataBindings.Add("text",bs,"MONTO_FACTURA");
             txt_ComentariosGen.DataBindings.Add("text",bs,"COMENTARIO");
+            // binding de detalle de factura
+            bsdetalle.DataSource = bs;
+            bsdetalle.DataMember = "FK_FACTURA_DETALLE";
+            
+            //Establecer los estilos de grid de productos.
+            GridProductos.AutoGenerateColumns = false;
+            AGREGAR_COLUMN_GRID("product_id",80,"Codigo","product_id",GridProductos);
+            AGREGAR_COLUMN_GRID("product_name", 250, "Descripcion del Articulo", "product_name", GridProductos);
+            AGREGAR_COLUMN_GRID("cantidad", 80, "Cantidad", "cantidad", GridProductos);
+            AGREGAR_COLUMN_GRID("precio", 80, "Precio", "precio", GridProductos);
+            AGREGAR_COLUMN_GRID("importe", 100, "Subtotal", "importe", GridProductos);
+            AGREGAR_COLUMN_GRID("impuesto", 100, "Impuesto", "impuesto", GridProductos);
+            AGREGAR_COLUMN_GRID("total_renglon", 100, "Total", "total_renglon", GridProductos);
+            GridProductos.DataSource = bsdetalle;
+            
+            
 
 
-            FacturasFake = LoadData.GetData();
+
+            
+
+
+            //FacturasFake = LoadData.GetData();
+        }
+
+        private void AGREGAR_COLUMN_GRID(string name, int size, string title, string field_db, DataGridView grid) 
+        {
+            DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn
+            {
+              Name = name,
+              Width = size,
+              HeaderText = title,
+              DataPropertyName = field_db
+            };
+            grid.Columns.Add(col);
         }
 
         private void Btn_LoadFactura_Click(object sender, EventArgs e)
@@ -101,6 +133,32 @@ namespace FacturaDesktopApp
 
 
 
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_NavSiguiente_Click(object sender, EventArgs e)
+        {
+            bs.Position += 1;
+        }
+
+        private void btn_navAnterior_Click(object sender, EventArgs e)
+        {
+            bs.Position -= 1;
+        }
+
+        private void btn_NavPrimero_Click(object sender, EventArgs e)
+        {
+            bs.Position = 0;
+
+        }
+
+        private void btn_navUltimo_Click(object sender, EventArgs e)
+        {
+            bs.Position = bs.Count - 1;
         }
     }
 }

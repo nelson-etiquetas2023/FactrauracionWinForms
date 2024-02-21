@@ -29,13 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Factura));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btn_AddFactura = new System.Windows.Forms.ToolStripButton();
-            this.btn_SaveFactura = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btn_navUltimo = new System.Windows.Forms.ToolStripButton();
             this.txt_numeroFactura = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_fechaFactura = new System.Windows.Forms.DateTimePicker();
@@ -48,13 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.GridProductos = new System.Windows.Forms.DataGridView();
-            this.idproduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.products = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Search = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imp = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txt_SubTotal = new System.Windows.Forms.TextBox();
             this.txt_Impuesto = new System.Windows.Forms.TextBox();
             this.txt_MontoTotalFactura = new System.Windows.Forms.TextBox();
@@ -73,6 +63,10 @@
             this.btn_LoadFactura = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.txt_LoadFactura = new System.Windows.Forms.TextBox();
+            this.btn_saveFacturas = new System.Windows.Forms.ToolStripButton();
+            this.btn_navAnterior = new System.Windows.Forms.ToolStripButton();
+            this.btn_NavSiguiente = new System.Windows.Forms.ToolStripButton();
+            this.btn_NavPrimero = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridProductos)).BeginInit();
@@ -93,12 +87,14 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_AddFactura,
-            this.btn_SaveFactura,
-            this.toolStripButton3,
-            this.toolStripButton4});
+            this.btn_saveFacturas,
+            this.btn_NavPrimero,
+            this.btn_NavSiguiente,
+            this.btn_navAnterior,
+            this.btn_navUltimo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(882, 30);
+            this.toolStrip1.Size = new System.Drawing.Size(981, 30);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -111,32 +107,15 @@
             this.btn_AddFactura.Size = new System.Drawing.Size(155, 27);
             this.btn_AddFactura.Text = "Agregar Factura";
             // 
-            // btn_SaveFactura
+            // btn_navUltimo
             // 
-            this.btn_SaveFactura.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SaveFactura.Image = ((System.Drawing.Image)(resources.GetObject("btn_SaveFactura.Image")));
-            this.btn_SaveFactura.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btn_SaveFactura.Name = "btn_SaveFactura";
-            this.btn_SaveFactura.Size = new System.Drawing.Size(155, 27);
-            this.btn_SaveFactura.Text = "Guardar Factura";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 27);
-            this.toolStripButton3.Text = "toolStripButton3";
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 27);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.btn_navUltimo.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_navUltimo.Image = ((System.Drawing.Image)(resources.GetObject("btn_navUltimo.Image")));
+            this.btn_navUltimo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_navUltimo.Name = "btn_navUltimo";
+            this.btn_navUltimo.Size = new System.Drawing.Size(83, 27);
+            this.btn_navUltimo.Text = "Ultimo";
+            this.btn_navUltimo.Click += new System.EventHandler(this.btn_navUltimo_Click);
             // 
             // txt_numeroFactura
             // 
@@ -192,11 +171,11 @@
             // 
             this.groupBox1.Controls.Add(this.rad_Contado);
             this.groupBox1.Controls.Add(this.rad_Credito);
-            this.groupBox1.Location = new System.Drawing.Point(659, 59);
+            this.groupBox1.Location = new System.Drawing.Point(730, 34);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(159, 144);
+            this.groupBox1.Size = new System.Drawing.Size(159, 165);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo de Pago:";
@@ -250,68 +229,17 @@
             // 
             // GridProductos
             // 
+            this.GridProductos.AllowUserToAddRows = false;
             this.GridProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idproduct,
-            this.products,
-            this.Search,
-            this.cantidad,
-            this.precio,
-            this.imp,
-            this.importe});
             this.GridProductos.Location = new System.Drawing.Point(14, 280);
             this.GridProductos.Margin = new System.Windows.Forms.Padding(4);
             this.GridProductos.Name = "GridProductos";
-            this.GridProductos.Size = new System.Drawing.Size(791, 303);
+            this.GridProductos.Size = new System.Drawing.Size(875, 303);
             this.GridProductos.TabIndex = 13;
-            // 
-            // idproduct
-            // 
-            this.idproduct.HeaderText = "Id. Producto";
-            this.idproduct.Name = "idproduct";
-            // 
-            // products
-            // 
-            this.products.HeaderText = "Descripcion del Articulo";
-            this.products.Name = "products";
-            this.products.Width = 180;
-            // 
-            // Search
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Search.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Search.HeaderText = "...";
-            this.Search.Name = "Search";
-            this.Search.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Search.Text = "...";
-            this.Search.ToolTipText = "Buscar productos";
-            this.Search.UseColumnTextForButtonValue = true;
-            this.Search.Width = 45;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cantidad";
-            this.cantidad.Name = "cantidad";
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            // 
-            // imp
-            // 
-            this.imp.HeaderText = "impuesto";
-            this.imp.Name = "imp";
-            // 
-            // importe
-            // 
-            this.importe.HeaderText = "Importe";
-            this.importe.Name = "importe";
             // 
             // txt_SubTotal
             // 
-            this.txt_SubTotal.Location = new System.Drawing.Point(602, 614);
+            this.txt_SubTotal.Location = new System.Drawing.Point(687, 600);
             this.txt_SubTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txt_SubTotal.Name = "txt_SubTotal";
             this.txt_SubTotal.Size = new System.Drawing.Size(202, 30);
@@ -319,7 +247,7 @@
             // 
             // txt_Impuesto
             // 
-            this.txt_Impuesto.Location = new System.Drawing.Point(602, 655);
+            this.txt_Impuesto.Location = new System.Drawing.Point(687, 641);
             this.txt_Impuesto.Margin = new System.Windows.Forms.Padding(4);
             this.txt_Impuesto.Name = "txt_Impuesto";
             this.txt_Impuesto.Size = new System.Drawing.Size(202, 30);
@@ -327,7 +255,7 @@
             // 
             // txt_MontoTotalFactura
             // 
-            this.txt_MontoTotalFactura.Location = new System.Drawing.Point(602, 696);
+            this.txt_MontoTotalFactura.Location = new System.Drawing.Point(687, 682);
             this.txt_MontoTotalFactura.Margin = new System.Windows.Forms.Padding(4);
             this.txt_MontoTotalFactura.Name = "txt_MontoTotalFactura";
             this.txt_MontoTotalFactura.Size = new System.Drawing.Size(202, 30);
@@ -336,7 +264,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(474, 619);
+            this.label6.Location = new System.Drawing.Point(559, 605);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(90, 23);
@@ -346,7 +274,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(475, 658);
+            this.label7.Location = new System.Drawing.Point(560, 644);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 23);
@@ -356,7 +284,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(475, 700);
+            this.label8.Location = new System.Drawing.Point(560, 686);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(120, 23);
@@ -396,7 +324,7 @@
             // btn_AddItems
             // 
             this.btn_AddItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_AddItems.Location = new System.Drawing.Point(811, 280);
+            this.btn_AddItems.Location = new System.Drawing.Point(925, 280);
             this.btn_AddItems.Margin = new System.Windows.Forms.Padding(4);
             this.btn_AddItems.Name = "btn_AddItems";
             this.btn_AddItems.Size = new System.Drawing.Size(49, 39);
@@ -407,7 +335,7 @@
             // btn_DeleteItems
             // 
             this.btn_DeleteItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_DeleteItems.Location = new System.Drawing.Point(811, 326);
+            this.btn_DeleteItems.Location = new System.Drawing.Point(925, 327);
             this.btn_DeleteItems.Margin = new System.Windows.Forms.Padding(4);
             this.btn_DeleteItems.Name = "btn_DeleteItems";
             this.btn_DeleteItems.Size = new System.Drawing.Size(49, 39);
@@ -418,7 +346,7 @@
             // chk_FacturaImpresa
             // 
             this.chk_FacturaImpresa.AutoSize = true;
-            this.chk_FacturaImpresa.Location = new System.Drawing.Point(479, 229);
+            this.chk_FacturaImpresa.Location = new System.Drawing.Point(546, 229);
             this.chk_FacturaImpresa.Margin = new System.Windows.Forms.Padding(4);
             this.chk_FacturaImpresa.Name = "chk_FacturaImpresa";
             this.chk_FacturaImpresa.Size = new System.Drawing.Size(154, 27);
@@ -429,7 +357,7 @@
             // chk_FacturaAnulada
             // 
             this.chk_FacturaAnulada.AutoSize = true;
-            this.chk_FacturaAnulada.Location = new System.Drawing.Point(665, 229);
+            this.chk_FacturaAnulada.Location = new System.Drawing.Point(734, 229);
             this.chk_FacturaAnulada.Margin = new System.Windows.Forms.Padding(4);
             this.chk_FacturaAnulada.Name = "chk_FacturaAnulada";
             this.chk_FacturaAnulada.Size = new System.Drawing.Size(155, 27);
@@ -455,7 +383,7 @@
             this.groupBox2.Controls.Add(this.txt_LoadFactura);
             this.groupBox2.Location = new System.Drawing.Point(12, 735);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(792, 77);
+            this.groupBox2.Size = new System.Drawing.Size(877, 77);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Resumen";
@@ -491,11 +419,50 @@
             this.txt_LoadFactura.TabIndex = 30;
             this.txt_LoadFactura.Text = "1";
             // 
+            // btn_saveFacturas
+            // 
+            this.btn_saveFacturas.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_saveFacturas.Image = ((System.Drawing.Image)(resources.GetObject("btn_saveFacturas.Image")));
+            this.btn_saveFacturas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_saveFacturas.Name = "btn_saveFacturas";
+            this.btn_saveFacturas.Size = new System.Drawing.Size(155, 27);
+            this.btn_saveFacturas.Text = "Guardar Factura";
+            // 
+            // btn_navAnterior
+            // 
+            this.btn_navAnterior.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_navAnterior.Image = ((System.Drawing.Image)(resources.GetObject("btn_navAnterior.Image")));
+            this.btn_navAnterior.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_navAnterior.Name = "btn_navAnterior";
+            this.btn_navAnterior.Size = new System.Drawing.Size(95, 27);
+            this.btn_navAnterior.Text = "Anterior";
+            this.btn_navAnterior.Click += new System.EventHandler(this.btn_navAnterior_Click);
+            // 
+            // btn_NavSiguiente
+            // 
+            this.btn_NavSiguiente.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_NavSiguiente.Image = ((System.Drawing.Image)(resources.GetObject("btn_NavSiguiente.Image")));
+            this.btn_NavSiguiente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_NavSiguiente.Name = "btn_NavSiguiente";
+            this.btn_NavSiguiente.Size = new System.Drawing.Size(103, 27);
+            this.btn_NavSiguiente.Text = "Siguiente";
+            this.btn_NavSiguiente.Click += new System.EventHandler(this.btn_NavSiguiente_Click);
+            // 
+            // btn_NavPrimero
+            // 
+            this.btn_NavPrimero.Font = new System.Drawing.Font("HP Simplified", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_NavPrimero.Image = ((System.Drawing.Image)(resources.GetObject("btn_NavPrimero.Image")));
+            this.btn_NavPrimero.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_NavPrimero.Name = "btn_NavPrimero";
+            this.btn_NavPrimero.Size = new System.Drawing.Size(93, 27);
+            this.btn_NavPrimero.Text = "Primero";
+            this.btn_NavPrimero.Click += new System.EventHandler(this.btn_NavPrimero_Click);
+            // 
             // Factura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 861);
+            this.ClientSize = new System.Drawing.Size(981, 861);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_buscar_factura);
             this.Controls.Add(this.chk_FacturaAnulada);
@@ -549,9 +516,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker txt_fechaFactura;
         private System.Windows.Forms.ToolStripButton btn_AddFactura;
-        private System.Windows.Forms.ToolStripButton btn_SaveFactura;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton btn_navUltimo;
         private System.Windows.Forms.RadioButton rad_Contado;
         private System.Windows.Forms.RadioButton rad_Credito;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -579,13 +544,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txt_LoadFactura;
         private System.Windows.Forms.Button btn_LoadFactura;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idproduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn products;
-        private System.Windows.Forms.DataGridViewButtonColumn Search;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn imp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn importe;
+        private System.Windows.Forms.ToolStripButton btn_saveFacturas;
+        private System.Windows.Forms.ToolStripButton btn_NavPrimero;
+        private System.Windows.Forms.ToolStripButton btn_NavSiguiente;
+        private System.Windows.Forms.ToolStripButton btn_navAnterior;
     }
 }
 
